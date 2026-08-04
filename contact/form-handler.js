@@ -1,0 +1,125 @@
+(() => {
+  const FORM_SELECTOR = "form#mail"
+  const API_URL = "/api/contact"
+
+  function labelText(input) {
+    const label = input.closest("label")
+    return label?.innerText?.trim() || input.value || ""
+  }
+
+  function setStatus(form, message, type) {
+    let status = form.querySelector("[data-rattl-form-status]")
+    if (!status) {
+      status = document.createElement("div")
+      status.setAttribute("data-rattl-form-status", "")
+      status.setAttribute("role", "status")
+      status.setAttribute("aria-live", "polite")
+      Object.assign(status.style, {
+        marginTop: "14px",
+        fontFamily: '"Alegreya Sans", Arial, sans-serif',
+        fontSize: "16px",
+        lineHeight: "1.35",
+        textAlign: "center",
+      })
+      form.appendChild(status)
+    }
+
+    status.textContent = message
+    status.style.color = type === "error" ? "#B84218" : "#031B28"
+  }
+
+  function setBusy(form, busy) {
+    const button = form.querySelector('button[type="submit"]')
+    if (!button) return
+
+    if (!button.dataset.originalLabel) {
+      button.dataset.originalLabel = button.innerText
+    }
+
+    button.disabled = busy
+    button.style.opacity = busy ? "0.65" : "1"
+    button.style.cursor = busy ? "wait" : "pointer"
+
+    const textNode = button.querySelector("p") || button
+    textNode.textContent = busy
+      ? "Even versturen…"
+      : button.dataset.originalLabel
+  }
+
+  async function submitForm(form) {
+    const name = form.querySelector('[name="Naam"]')?.value?.trim() || ""
+    const email = form.querySelector('[name="E-mail"]')?.value?.trim() || ""
+    const message = form.querySelector('[name="Bericht"]')?.value?.trim() || ""
+    const website = form.querySelector('[name="website"]')?.value?.trim() || ""
+
+    const helpInput = form.querySelector('[name="Hulpvraag"]:checked')
+    const momentInput = form.querySelector('[name="Contactmoment"]:checked')
+
+    if (!name || !email || !message) {
+      setStatus(
+        form,
+        "Vul je naam, e-mailadres en bericht in.",
+        "error"
+      )
+      form.querySelector(
+        !name ? '[name="Naam"]' : !email ? '[name="E-mail"]' : '[name="Bericht"]'
+      )?.focus()
+      return
+    }
+
+    setBusy(form, true)
+    setStatus(form, "", "success")
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          website,
+          helpQuestion: helpInput ? labelText(helpInput) : "",
+          contactMoment: momentInput ? labelText(momentInput) : "",
+        }),
+      })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || "Verzenden is niet gelukt.")
+      }
+
+      form.reset()
+      setStatus(
+        form,
+        "Dankjewel! Je bericht is verstuurd. Ik neem snel contact met je op.",
+        "success"
+      )
+    } catch (error) {
+      console.error(error)
+      setStatus(
+        form,
+        error.message || "Verzenden is niet gelukt. Probeer het later opnieuw.",
+        "error"
+      )
+    } finally {
+      setBusy(form, false)
+    }
+  }
+
+  // Capture phase prevents Framer's old submit handler from firing first.
+  document.addEventListener(
+    "submit",
+    (event) => {
+      const form = event.target.closest?.(FORM_SELECTOR)
+      if (!form) return
+
+      event.preventDefault()
+      event.stopPropagation()
+      event.stopImmediatePropagation()
+      submitForm(form)
+    },
+    true
+  )
+})()
