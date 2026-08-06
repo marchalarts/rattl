@@ -77,7 +77,7 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.RESEND_API_KEY
   const to =
-    process.env.CONTACT_TO_EMAIL || "roelvandelden@gmail.com"
+    process.env.CONTACT_TO_EMAIL || "marchalarts@gmail.com"
   const from =
     process.env.CONTACT_FROM_EMAIL ||
     "RATTL Website <onboarding@resend.dev>"
