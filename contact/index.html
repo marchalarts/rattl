@@ -94,126 +94,222 @@
       font: inherit;
     }
 
-    .header-shell {
+    .homepage-static-nav {
       position: relative;
       z-index: 10;
       width: 100%;
-      margin: 0;
       padding-top: 24px;
     }
 
-    .site-header {
-      width: min(1512px, 100%);
-      min-height: 79px;
-      margin: 0 auto;
-      padding: 0 96px;
+    .homepage-static-nav__inner {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 48px;
-      background: transparent;
-      border-radius: 0;
-      box-shadow: none;
+      width: min(1512px, 100%);
+      height: min-content;
+      margin: 0 auto;
+      padding: 0 96px;
+      overflow: visible;
     }
 
-    .logo {
+    .homepage-static-nav__logo-wrap {
+      position: relative;
+      flex: none;
+      width: 177px;
+      height: auto;
+    }
+
+    .homepage-static-nav__logo {
       position: relative;
       display: block;
       width: 173px;
       height: 79px;
-      flex: 0 0 auto;
       text-decoration: none;
     }
 
-    .logo img {
+    .homepage-static-nav__logo img {
       position: absolute;
       inset: 0;
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
     }
 
-    .nav {
+    .homepage-static-nav__menu {
+      position: relative;
       display: flex;
+      flex: none;
       align-items: center;
       justify-content: flex-start;
       gap: 48px;
-      width: max-content;
+      width: min-content;
       height: 56px;
       padding: 24px 32px;
+      overflow: visible;
     }
 
-    .nav-link {
+    .homepage-static-nav__link {
       position: relative;
       display: flex;
       align-items: center;
+      justify-content: center;
+      width: max-content;
       height: 26px;
       padding: 0;
-      color: var(--navy);
+      color: #223640;
       font-family: "Base Neue Trial Bold", Arial, sans-serif;
       font-size: 24px;
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0;
+      text-decoration: none;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
-    .nav-link::after {
+    .homepage-static-nav__link::after {
       content: "";
       position: absolute;
-      left: 50%;
+      right: 0;
       bottom: -6px;
-      width: 0;
+      left: 0;
       height: 3px;
       border-radius: 1px;
-      background: var(--navy);
-      transform: translateX(-50%);
-      transition: width 180ms ease;
+      background: #223640;
+      opacity: 0;
+      transform: scaleX(0);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease;
     }
 
-    .nav-link:hover::after,
-    .nav-link:focus-visible::after {
-      width: 100%;
+    .homepage-static-nav__link:hover::after,
+    .homepage-static-nav__link:focus-visible::after {
+      opacity: 1;
+      transform: scaleX(1);
     }
 
-    .nav-cta {
+    .homepage-static-nav__button-wrap {
       position: relative;
-      display: inline-flex;
+      flex: none;
+      width: auto;
+      height: auto;
+    }
+
+    .homepage-static-nav__button {
+      position: relative;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: max-content;
-      min-height: 66px;
+      width: min-content;
+      height: min-content;
       padding: 16px 32px;
-      border: 1px solid var(--navy);
+      overflow: visible;
+      border: 1px solid #223640;
       border-radius: 999px;
-      color: var(--navy);
       background: transparent;
+      color: #223640;
       font-family: "Alegreya Sans", Arial, sans-serif;
       font-size: 28px;
       font-weight: 500;
       line-height: 1.2;
+      text-align: center;
       text-decoration: none;
       white-space: nowrap;
+      cursor: pointer;
       transition:
         background-color 180ms ease,
-        color 180ms ease,
-        transform 180ms ease;
+        color 180ms ease;
     }
 
-    .nav-cta:hover,
-    .nav-cta:focus-visible {
-      background: var(--navy);
-      color: var(--cream);
-      transform: translateY(-1px);
+    .homepage-static-nav__button:hover,
+    .homepage-static-nav__button:focus-visible {
+      background: #223640;
+      color: #f6ecdd;
+    }
+
+    @media (max-width: 1279px) {
+      .homepage-static-nav__inner {
+        padding-inline: 48px;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .homepage-static-nav__inner {
+        gap: 48px;
+      }
+
+      .homepage-static-nav__menu {
+        gap: 32px;
+        padding-inline: 0;
+      }
+
+      .homepage-static-nav__link {
+        font-size: 20px;
+      }
+
+      .homepage-static-nav__button {
+        padding: 14px 24px;
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 809px) {
+      .homepage-static-nav {
+        padding-top: 16px;
+      }
+
+      .homepage-static-nav__inner {
+        padding-inline: 24px;
+      }
+
+      .homepage-static-nav__logo-wrap {
+        width: 135px;
+      }
+
+      .homepage-static-nav__logo {
+        width: 131px;
+        height: 60px;
+      }
+
+      .homepage-static-nav__menu {
+        display: none;
+      }
+
+      .homepage-static-nav__button {
+        padding: 12px 20px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .homepage-static-nav__inner {
+        padding-inline: 16px;
+      }
+
+      .homepage-static-nav__logo-wrap {
+        width: 122px;
+      }
+
+      .homepage-static-nav__logo {
+        width: 118px;
+        height: 54px;
+      }
+
+      .homepage-static-nav__button {
+        padding: 10px 16px;
+        font-size: 17px;
+      }
     }
 
     main {
       width: min(100% - 48px, 1110px);
       margin: 0 auto;
-      padding: 86px 0 120px;
+      padding: 72px 0 120px;
     }
 
     .intro {
@@ -416,26 +512,14 @@
       overflow: hidden !important;
     }
 
-    @media (max-width: 1279px) {
-      .site-header {
-        padding-inline: 48px;
-      }
-    }
-
-    @media (max-width: 1023px) {
-      .site-header {
-        gap: 48px;
-        padding-inline: 48px;
-      }
 
       .logo {
-        width: 173px;
-        height: 79px;
+        width: 186px;
       }
 
       .nav {
-        gap: 28px;
-        padding-inline: 0;
+        gap: 24px;
+        padding: 16px 0;
       }
 
       .nav-link {
@@ -443,8 +527,8 @@
       }
 
       .nav-cta {
-        min-height: 58px;
-        padding: 16px 28px;
+        min-height: 54px;
+        padding: 14px 24px;
         font-size: 22px;
       }
 
@@ -460,35 +544,10 @@
     }
 
     @media (max-width: 809px) {
-      .header-shell {
-        padding-top: 16px;
-      }
-
       .site-header {
-        justify-content: space-between;
-        gap: 24px;
-        padding-inline: 24px;
+        min-height: 84px;
+        padding: 18px 24px;
       }
-
-      .logo {
-        width: 131px;
-        height: 60px;
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .nav-cta {
-        min-height: 50px;
-        padding: 12px 20px;
-        font-size: 18px;
-      }
-
-      main {
-        padding-top: 42px;
-      }
-    }
 
       .logo {
         width: 132px;
@@ -525,23 +584,27 @@
     }
 
     @media (max-width: 560px) {
+      .header-shell {
+        width: calc(100% - 24px);
+        margin-top: 12px;
+      }
+
       .site-header {
-        padding-inline: 16px;
+        padding: 8px 16px;
       }
 
       .logo {
-        width: 118px;
-        height: 54px;
+        width: 92px;
       }
 
       .nav-cta {
-        min-height: 46px;
+        min-height: 44px;
         padding: 10px 16px;
         font-size: 17px;
       }
 
       main {
-        padding-top: 34px;
+        padding-top: 46px;
       }
 
       .intro {
@@ -578,24 +641,50 @@
 </head>
 
 <body>
-  <div class="header-shell">
-    <header class="site-header">
-      <a class="logo" href="/" aria-label="RATTL home">
-        <img
-          src="/images/ODbGNB09BfHX4NeabD7DjKqgVBU.png"
-          alt="RATTL"
+  <div class="homepage-static-nav">
+    <div class="homepage-static-nav__inner">
+      <div class="homepage-static-nav__logo-wrap">
+        <a
+          class="homepage-static-nav__logo"
+          href="/"
+          aria-label="RATTL home"
         >
-      </a>
+          <img
+            src="/images/ODbGNB09BfHX4NeabD7DjKqgVBU.png"
+            alt="RATTL"
+          >
+        </a>
+      </div>
 
-      <nav class="nav" aria-label="Hoofdnavigatie">
-        <a class="nav-link" href="/#diensten">Coaching en design</a>
-        <a class="nav-link" href="/#werkwijze">Over RATTL</a>
+      <nav
+        class="homepage-static-nav__menu"
+        aria-label="Hoofdnavigatie"
+      >
+        <a
+          class="homepage-static-nav__link"
+          href="/#diensten"
+        >
+          Coaching en design
+        </a>
+
+        <a
+          class="homepage-static-nav__link"
+          href="/#werkwijze"
+        >
+          Over RATTL
+        </a>
       </nav>
 
-      <a class="nav-cta" href="/contact/" aria-current="page">
-        Let's talk!
-      </a>
-    </header>
+      <div class="homepage-static-nav__button-wrap">
+        <a
+          class="homepage-static-nav__button"
+          href="/contact/"
+          aria-current="page"
+        >
+          Let's talk!
+        </a>
+      </div>
+    </div>
   </div>
 
   <main>
