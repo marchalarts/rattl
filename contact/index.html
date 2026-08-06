@@ -97,35 +97,30 @@
     .header-shell {
       position: relative;
       z-index: 10;
-      width: min(1320px, calc(100% - 48px));
-      margin: 16px auto 0;
+      width: 100%;
+      margin: 0;
     }
 
     .site-header {
-      width: 100%;
-      min-height: 88px;
-      padding: 16px 48px;
+      width: min(1512px, 100%);
+      min-height: 120px;
+      margin: 0 auto;
+      padding: 32px 96px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
-      background: #f2e4d2;
-      border-radius: 999px;
-      box-shadow: 0 5px 24px rgba(0, 0, 0, 0.05);
+      gap: 48px;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .logo {
       position: relative;
       display: block;
-      width: 100px;
-      aspect-ratio: 2.15556;
+      width: 218px;
+      aspect-ratio: 1258 / 578;
       flex: 0 0 auto;
-      transition: transform 180ms ease;
-    }
-
-    .logo:hover,
-    .logo:focus-visible {
-      transform: translateX(4px);
     }
 
     .logo img {
@@ -150,11 +145,11 @@
       position: relative;
       display: flex;
       align-items: center;
-      height: 26px;
+      height: 28px;
       padding: 4px;
       color: var(--navy);
       font-family: "Base Neue Trial Bold", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
       line-height: 1;
       text-transform: uppercase;
@@ -183,14 +178,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 58px;
+      min-height: 64px;
       padding: 16px 32px;
       border: 1px solid var(--navy);
       border-radius: 999px;
       color: var(--navy);
       background: transparent;
       font-family: "Alegreya Sans", Arial, sans-serif;
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 500;
       line-height: 1.2;
       white-space: nowrap;
@@ -414,22 +409,34 @@
     }
 
     @media (max-width: 1023px) {
-      .header-shell {
-        width: calc(100% - 32px);
+      .site-header {
+        min-height: 104px;
+        padding: 24px 48px;
+        gap: 28px;
       }
 
-      .site-header {
-        padding: 8px 24px;
+      .logo {
+        width: 186px;
       }
 
       .nav {
         gap: 24px;
-        padding-inline: 0;
+        padding: 16px 0;
+      }
+
+      .nav-link {
+        font-size: 20px;
+      }
+
+      .nav-cta {
+        min-height: 54px;
+        padding: 14px 24px;
+        font-size: 22px;
       }
 
       main {
         width: min(100% - 32px, 1110px);
-        padding: 70px 0 86px;
+        padding: 58px 0 86px;
       }
 
       .contact-form {
@@ -439,9 +446,29 @@
     }
 
     @media (max-width: 809px) {
+      .site-header {
+        min-height: 84px;
+        padding: 18px 24px;
+      }
+
+      .logo {
+        width: 132px;
+      }
+
       .nav {
         display: none;
       }
+
+      .nav-cta {
+        min-height: 46px;
+        padding: 10px 18px;
+        font-size: 18px;
+      }
+
+      main {
+        padding-top: 42px;
+      }
+    }
 
       .site-header {
         min-height: 72px;
@@ -526,16 +553,13 @@
       </a>
 
       <nav class="nav" aria-label="Hoofdnavigatie">
-        <a class="nav-link" href="/#coaching-design">
-          Coaching en Design
-        </a>
-        <a class="nav-link" href="/#over-rattl">
-          Over RATTL
-        </a>
+        <a class="nav-link" href="/#diensten">Diensten</a>
+        <a class="nav-link" href="/#werkwijze">Over RATTL</a>
+        <a class="nav-link" href="/#over-roel">Over Roel</a>
       </nav>
 
       <a class="nav-cta" href="/contact/" aria-current="page">
-        Let's talk
+        Let's talk!
       </a>
     </header>
   </div>
