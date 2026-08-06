@@ -94,81 +94,125 @@
       font: inherit;
     }
 
+    .header-shell {
+      position: fixed;
+      z-index: 1000;
+      top: 16px;
+      left: 50%;
+      width: min(1320px, calc(100% - 48px));
+      transform: translateX(-50%);
+    }
+
     .site-header {
-      width: min(100% - 48px, 1380px);
-      margin: 0 auto;
-      padding: 28px 0;
+      width: 100%;
+      min-height: 88px;
+      padding: 16px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 32px;
+      background: #f2e4d2;
+      border-radius: 999px;
+      box-shadow: 0 5px 24px rgba(0, 0, 0, 0.05);
     }
 
     .logo {
+      position: relative;
       display: block;
-      width: 174px;
+      width: 100px;
+      aspect-ratio: 2.15556;
       flex: 0 0 auto;
+      transition: transform 180ms ease;
+    }
+
+    .logo:hover,
+    .logo:focus-visible {
+      transform: translateX(4px);
     }
 
     .logo img {
+      position: absolute;
+      inset: 0;
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
     }
 
     .nav {
       display: flex;
       align-items: center;
-      gap: 34px;
-      font-family: "Base Neue Trial Bold", Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
+      justify-content: center;
+      gap: 48px;
+      min-height: 56px;
+      padding: 24px 32px;
     }
 
-    .nav a {
+    .nav-link {
       position: relative;
-      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      height: 26px;
+      padding: 4px;
+      color: var(--navy);
+      font-family: "Base Neue Trial Bold", Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .nav a:not(.nav-cta)::after {
+    .nav-link::after {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 1px;
-      height: 2px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 220ms ease;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      border-radius: 1px;
+      background: var(--navy);
+      transform: translateX(-50%);
+      transition: width 180ms ease;
     }
 
-    .nav a:not(.nav-cta):hover::after,
-    .nav a:not(.nav-cta):focus-visible::after {
-      transform: scaleX(1);
-      transform-origin: left;
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      width: calc(100% - 8px);
     }
 
     .nav-cta {
-      padding: 14px 22px !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 16px 32px;
       border: 1px solid var(--navy);
       border-radius: 999px;
+      color: var(--navy);
+      background: transparent;
+      font-family: "Alegreya Sans", Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+      white-space: nowrap;
       transition:
         background-color 180ms ease,
-        color 180ms ease;
+        color 180ms ease,
+        transform 180ms ease;
     }
 
     .nav-cta:hover,
     .nav-cta:focus-visible {
       background: var(--navy);
       color: var(--cream);
+      transform: translateY(-1px);
     }
 
     main {
       width: min(100% - 48px, 1110px);
       margin: 0 auto;
-      padding: 70px 0 120px;
+      padding: 190px 0 120px;
     }
 
     .intro {
@@ -371,18 +415,23 @@
       overflow: hidden !important;
     }
 
-    @media (max-width: 900px) {
-      .site-header {
-        width: min(100% - 32px, 1380px);
+    @media (max-width: 1023px) {
+      .header-shell {
+        width: calc(100% - 32px);
       }
 
-      .nav a:not(.nav-cta) {
-        display: none;
+      .site-header {
+        padding: 8px 24px;
+      }
+
+      .nav {
+        gap: 24px;
+        padding-inline: 0;
       }
 
       main {
         width: min(100% - 32px, 1110px);
-        padding: 54px 0 86px;
+        padding: 170px 0 86px;
       }
 
       .contact-form {
@@ -391,22 +440,48 @@
       }
     }
 
-    @media (max-width: 560px) {
-      .site-header {
-        padding: 20px 0;
+    @media (max-width: 809px) {
+      .nav {
+        display: none;
       }
 
-      .logo {
-        width: 142px;
+      .site-header {
+        min-height: 72px;
       }
 
       .nav-cta {
-        padding: 11px 16px !important;
-        font-size: 14px;
+        min-height: 48px;
+        padding: 12px 20px;
+        font-size: 18px;
       }
 
       main {
-        padding-top: 38px;
+        padding-top: 140px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header-shell {
+        top: 12px;
+        width: calc(100% - 24px);
+      }
+
+      .site-header {
+        padding: 8px 16px;
+      }
+
+      .logo {
+        width: 92px;
+      }
+
+      .nav-cta {
+        min-height: 44px;
+        padding: 10px 16px;
+        font-size: 17px;
+      }
+
+      main {
+        padding-top: 126px;
       }
 
       .intro {
@@ -443,20 +518,26 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="logo" href="/" aria-label="RATTL home">
-      <img
-        src="/images/ODbGNB09BfHX4NeabD7DjKqgVBU.png"
-        alt="RATTL"
-      >
-    </a>
+  <div class="header-shell">
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="RATTL home">
+        <img
+          src="/images/ODbGNB09BfHX4NeabD7DjKqgVBU.png"
+          alt="RATTL"
+        >
+      </a>
 
-    <nav class="nav" aria-label="Hoofdnavigatie">
-      <a href="/#diensten">Coaching &amp; design</a>
-      <a href="/#werkwijze">Over RATTL</a>
-      <a class="nav-cta" href="/contact/" aria-current="page">Let's talk!</a>
-    </nav>
-  </header>
+      <nav class="nav" aria-label="Hoofdnavigatie">
+        <a class="nav-link" href="/#diensten">Diensten</a>
+        <a class="nav-link" href="/#werkwijze">Over RATTL</a>
+        <a class="nav-link" href="/#over-roel">Over Roel</a>
+      </nav>
+
+      <a class="nav-cta" href="/contact/" aria-current="page">
+        Let's talk!
+      </a>
+    </header>
+  </div>
 
   <main>
     <section class="intro" aria-labelledby="contact-title">
