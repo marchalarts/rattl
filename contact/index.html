@@ -99,13 +99,14 @@
       z-index: 10;
       width: 100%;
       margin: 0;
+      padding-top: 24px;
     }
 
     .site-header {
       width: min(1512px, 100%);
-      min-height: 120px;
+      min-height: 79px;
       margin: 0 auto;
-      padding: 32px 96px;
+      padding: 0 96px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -118,9 +119,10 @@
     .logo {
       position: relative;
       display: block;
-      width: 218px;
-      aspect-ratio: 1258 / 578;
+      width: 173px;
+      height: 79px;
       flex: 0 0 auto;
+      text-decoration: none;
     }
 
     .logo img {
@@ -135,9 +137,10 @@
     .nav {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 48px;
-      min-height: 56px;
+      width: max-content;
+      height: 56px;
       padding: 24px 32px;
     }
 
@@ -145,13 +148,14 @@
       position: relative;
       display: flex;
       align-items: center;
-      height: 28px;
-      padding: 4px;
+      height: 26px;
+      padding: 0;
       color: var(--navy);
       font-family: "Base Neue Trial Bold", Arial, sans-serif;
       font-size: 24px;
       font-weight: 700;
       line-height: 1;
+      letter-spacing: 0;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -160,7 +164,7 @@
       content: "";
       position: absolute;
       left: 50%;
-      bottom: 0;
+      bottom: -6px;
       width: 0;
       height: 3px;
       border-radius: 1px;
@@ -171,14 +175,17 @@
 
     .nav-link:hover::after,
     .nav-link:focus-visible::after {
-      width: calc(100% - 8px);
+      width: 100%;
     }
 
     .nav-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 64px;
+      gap: 8px;
+      width: max-content;
+      min-height: 66px;
       padding: 16px 32px;
       border: 1px solid var(--navy);
       border-radius: 999px;
@@ -188,6 +195,7 @@
       font-size: 28px;
       font-weight: 500;
       line-height: 1.2;
+      text-decoration: none;
       white-space: nowrap;
       transition:
         background-color 180ms ease,
@@ -408,20 +416,26 @@
       overflow: hidden !important;
     }
 
+    @media (max-width: 1279px) {
+      .site-header {
+        padding-inline: 48px;
+      }
+    }
+
     @media (max-width: 1023px) {
       .site-header {
-        min-height: 104px;
-        padding: 24px 48px;
-        gap: 28px;
+        gap: 48px;
+        padding-inline: 48px;
       }
 
       .logo {
-        width: 186px;
+        width: 173px;
+        height: 79px;
       }
 
       .nav {
-        gap: 24px;
-        padding: 16px 0;
+        gap: 28px;
+        padding-inline: 0;
       }
 
       .nav-link {
@@ -429,8 +443,8 @@
       }
 
       .nav-cta {
-        min-height: 54px;
-        padding: 14px 24px;
+        min-height: 58px;
+        padding: 16px 28px;
         font-size: 22px;
       }
 
@@ -446,10 +460,35 @@
     }
 
     @media (max-width: 809px) {
-      .site-header {
-        min-height: 84px;
-        padding: 18px 24px;
+      .header-shell {
+        padding-top: 16px;
       }
+
+      .site-header {
+        justify-content: space-between;
+        gap: 24px;
+        padding-inline: 24px;
+      }
+
+      .logo {
+        width: 131px;
+        height: 60px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .nav-cta {
+        min-height: 50px;
+        padding: 12px 20px;
+        font-size: 18px;
+      }
+
+      main {
+        padding-top: 42px;
+      }
+    }
 
       .logo {
         width: 132px;
@@ -486,27 +525,23 @@
     }
 
     @media (max-width: 560px) {
-      .header-shell {
-        width: calc(100% - 24px);
-        margin-top: 12px;
-      }
-
       .site-header {
-        padding: 8px 16px;
+        padding-inline: 16px;
       }
 
       .logo {
-        width: 92px;
+        width: 118px;
+        height: 54px;
       }
 
       .nav-cta {
-        min-height: 44px;
+        min-height: 46px;
         padding: 10px 16px;
         font-size: 17px;
       }
 
       main {
-        padding-top: 46px;
+        padding-top: 34px;
       }
 
       .intro {
@@ -553,9 +588,8 @@
       </a>
 
       <nav class="nav" aria-label="Hoofdnavigatie">
-        <a class="nav-link" href="/#diensten">Diensten</a>
+        <a class="nav-link" href="/#diensten">Coaching en design</a>
         <a class="nav-link" href="/#werkwijze">Over RATTL</a>
-        <a class="nav-link" href="/#over-roel">Over Roel</a>
       </nav>
 
       <a class="nav-cta" href="/contact/" aria-current="page">
