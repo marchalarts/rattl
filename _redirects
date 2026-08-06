@@ -1,2 +1,2 @@
-# Framer client-side routes → exported .html files
-/projects/:slug  /:slug.html  200
+# FramerExporter — nested folders (e.g. journey/index.html) serve /journey and /journey/
+# No rewrite rules required for multi-page static hosting.
